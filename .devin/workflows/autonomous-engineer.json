@@ -1,0 +1,46 @@
+{
+  "name": "Autonomous Engineer",
+  "description": "Self-healing pipeline monitor that watches Kafka lag, restarts failed pods, and ensures 99.9% uptime",
+  "triggers": [
+    {
+      "type": "metric_threshold",
+      "metric": "kafka_consumer_lag_ms",
+      "threshold": 5000,
+      "action": "restart_consumer_pod"
+    },
+    {
+      "type": "health_check_failure",
+      "service": "api-service",
+      "action": "restart_and_notify"
+    },
+    {
+      "type": "deployment_failure",
+      "action": "rollback_and_alert"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "monitor-pipeline",
+      "schedule": "*/1 * * * *",
+      "commands": [
+        "kubectl get pods -n momento-core",
+        "kafka-consumer-groups --describe --group momento-ingest",
+        "curl -s http://localhost:8000/health"
+      ],
+      "on_failure": "alert_and_restart"
+    },
+    {
+      "id": "auto-heal",
+      "condition": "pod_status != Running",
+      "commands": [
+        "kubectl delete pod {{pod_name}} -n momento-core",
+        "kubectl rollout restart deployment/{{deployment_name}} -n momento-core"
+      ]
+    }
+  ],
+  "notifications": {
+    "slack": true,
+    "github_issue": true,
+    "email_on_critical": true
+  }
+}

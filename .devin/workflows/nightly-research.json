@@ -1,0 +1,48 @@
+{
+  "name": "Nightly Research Agent",
+  "description": "Runs comprehensive backtests, analyzes new patterns, and updates documentation automatically",
+  "triggers": [
+    {
+      "type": "schedule",
+      "cron": "0 2 * * *",
+      "timezone": "UTC"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "fetch-latest-data",
+      "commands": [
+        "python -m core.data_core.ingest.api_ingestor --days 1",
+        "python -m core.data_core.processing.feature_extractor --output features_latest.parquet"
+      ]
+    },
+    {
+      "id": "run-backtest",
+      "commands": [
+        "python -m tests.integration.backtest --strategy aggressive --output results.json",
+        "python -m tests.integration.backtest --strategy conservative --output results_conservative.json"
+      ]
+    },
+    {
+      "id": "analyze-patterns",
+      "commands": [
+        "python -m agents.research --analyze-colors --analyze-bands --output analysis.md"
+      ]
+    },
+    {
+      "id": "update-docs",
+      "commands": [
+        "cat analysis.md >> docs/MASTER_PROJECT_DOCUMENTATION.md",
+        "git add docs/",
+        "git commit -m 'docs: Auto-update research findings $(date)'",
+        "git push origin main"
+      ],
+      "condition": "analysis_found"
+    }
+  ],
+  "notifications": {
+    "slack_summary": true,
+    "github_comment": true,
+    "email_report": true
+  }
+}

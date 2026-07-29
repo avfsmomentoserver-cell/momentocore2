@@ -1,0 +1,38 @@
+# Devin Desktop Configuration for MomentoCore
+# Enables autonomous engineering, self-healing, and nightly research
+
+version: "1.0"
+project: "MomentoCore"
+description: "Military-grade algorithmic trading platform with AI agents"
+
+environment:
+  python_version: "3.11"
+  node_version: "20"
+  docker_enabled: true
+  kubernetes_context: "docker-desktop"
+
+agents:
+  - name: "autonomous-engineer"
+    role: "Self-healing pipeline monitor and deployment manager"
+    workflow: "workflows/autonomous-engineer.json"
+    schedule: "continuous"
+    
+  - name: "researcher"
+    role: "Nightly backtesting and pattern analysis"
+    workflow: "workflows/nightly-research.json"
+    schedule: "0 2 * * *"  # 2 AM daily
+
+settings:
+  auto_commit: true
+  branch_protection: main
+  require_tests: true
+  max_concurrent_tasks: 3
+  
+monitoring:
+  kafka_lag_threshold: 5000  # milliseconds
+  api_latency_threshold: 200  # milliseconds
+  auto_restart_on_failure: true
+  
+notifications:
+  slack_webhook: "${SLACK_WEBHOOK_URL}"
+  github_status_updates: true
