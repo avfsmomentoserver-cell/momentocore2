@@ -1,0 +1,41 @@
+# Weaviate Schema: Patterns
+# Stores detected patterns and signals
+
+ClassConfig:
+  class: Pattern
+  description: "Detected market pattern with confidence score and metadata"
+  vectorizer: text2vec-transformers
+  
+properties:
+  - name: pattern_id
+    dataType: [string]
+    description: "Unique pattern identifier"
+    indexFilterable: true
+    
+  - name: pattern_type
+    dataType: [string]
+    description: "Type of pattern (hot_streak, color_bias, band_cluster)"
+    indexFilterable: true
+    
+  - name: confidence
+    dataType: [number]
+    description: "Detection confidence (0.0-1.0)"
+    indexFilterable: true
+    
+  - name: timestamp
+    dataType: [date]
+    description: "Pattern detection timestamp"
+    indexFilterable: true
+    
+  - name: round_ids
+    dataType: [string[]]
+    description: "Array of associated round IDs"
+    
+  - name: signal_action
+    dataType: [string]
+    description: "Recommended action (WAIT, BET_CONSERVATIVE, BET_AGGRESSIVE)"
+    indexFilterable: true
+    
+  - name: metadata_json
+    dataType: [text]
+    description: "JSON string of additional pattern metadata"

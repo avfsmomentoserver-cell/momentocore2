@@ -1,0 +1,20 @@
+[
+  {
+    "pattern_id": "pat_001",
+    "pattern_type": "hot_streak",
+    "confidence": 0.87,
+    "timestamp": "2026-07-24T10:20:00Z",
+    "round_ids": ["rnd_001", "rnd_003", "rnd_004"],
+    "signal_action": "BET_AGGRESSIVE",
+    "metadata_json": "{\"streak_length\": 3, \"avg_multiplier\": 65.0}"
+  },
+  {
+    "pattern_id": "pat_002",
+    "pattern_type": "color_bias",
+    "confidence": 0.72,
+    "timestamp": "2026-07-24T10:25:00Z",
+    "round_ids": ["rnd_001", "rnd_003", "rnd_004"],
+    "signal_action": "BET_CONSERVATIVE",
+    "metadata_json": "{\"pink_ratio\": 0.33, \"purple_ratio\": 0.67}"
+  }
+]

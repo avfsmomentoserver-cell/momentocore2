@@ -1,0 +1,42 @@
+[
+  {
+    "round_id": "rnd_001",
+    "multiplier": 2.34,
+    "color": "purple",
+    "band": "mega",
+    "timestamp": "2026-07-24T10:15:30Z",
+    "is_high_value": true
+  },
+  {
+    "round_id": "rnd_002",
+    "multiplier": 1.12,
+    "color": "blue",
+    "band": "standard",
+    "timestamp": "2026-07-24T10:16:45Z",
+    "is_high_value": false
+  },
+  {
+    "round_id": "rnd_003",
+    "multiplier": 189.45,
+    "color": "pink",
+    "band": "cosmic",
+    "timestamp": "2026-07-24T10:17:20Z",
+    "is_high_value": true
+  },
+  {
+    "round_id": "rnd_004",
+    "multiplier": 3.21,
+    "color": "purple",
+    "band": "moonshot",
+    "timestamp": "2026-07-24T10:18:05Z",
+    "is_high_value": true
+  },
+  {
+    "round_id": "rnd_005",
+    "multiplier": 1.05,
+    "color": "blue",
+    "band": "standard",
+    "timestamp": "2026-07-24T10:19:10Z",
+    "is_high_value": false
+  }
+]

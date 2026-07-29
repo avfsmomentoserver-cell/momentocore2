@@ -1,0 +1,51 @@
+# Weaviate Schema: Insights
+# Stores AI-generated insights and research findings
+
+ClassConfig:
+  class: Insight
+  description: "AI-generated market insight with supporting evidence"
+  vectorizer: text2vec-transformers
+  
+properties:
+  - name: insight_id
+    dataType: [string]
+    description: "Unique insight identifier"
+    indexFilterable: true
+    
+  - name: title
+    dataType: [text]
+    description: "Short descriptive title"
+    indexSearchable: true
+    
+  - name: content
+    dataType: [text]
+    description: "Detailed insight content"
+    indexSearchable: true
+    
+  - name: insight_type
+    dataType: [string]
+    description: "Type (statistical, pattern, anomaly, prediction)"
+    indexFilterable: true
+    
+  - name: confidence
+    dataType: [number]
+    description: "Confidence score (0.0-1.0)"
+    indexFilterable: true
+    
+  - name: timestamp
+    dataType: [date]
+    description: "Insight generation timestamp"
+    indexFilterable: true
+    
+  - name: agent_source
+    dataType: [string]
+    description: "Agent that generated this insight"
+    indexFilterable: true
+    
+  - name: evidence_round_ids
+    dataType: [string[]]
+    description: "Supporting round IDs"
+    
+  - name: tags
+    dataType: [string[]]
+    description: "Categorization tags"

@@ -1,0 +1,43 @@
+# Weaviate Schema: Sessions
+# Groups rounds into sessions based on time gaps
+
+ClassConfig:
+  class: Session
+  description: "Grouped trading session with aggregated statistics"
+  vectorizer: text2vec-transformers
+  
+properties:
+  - name: session_id
+    dataType: [string]
+    description: "Unique session identifier"
+    indexFilterable: true
+    
+  - name: start_time
+    dataType: [date]
+    description: "Session start timestamp"
+    indexFilterable: true
+    
+  - name: end_time
+    dataType: [date]
+    description: "Session end timestamp"
+    indexFilterable: true
+    
+  - name: round_count
+    dataType: [int]
+    description: "Number of rounds in session"
+    
+  - name: avg_multiplier
+    dataType: [number]
+    description: "Average multiplier across session"
+    
+  - name: max_multiplier
+    dataType: [number]
+    description: "Maximum multiplier in session"
+    
+  - name: high_value_count
+    dataType: [int]
+    description: "Count of rounds with multiplier >= 2.0x"
+    
+  - name: round_ids
+    dataType: [string[]]
+    description: "Array of round IDs in this session"

@@ -1,0 +1,43 @@
+# Weaviate Schema: Rounds
+# Stores individual trading round data
+
+ClassConfig:
+  class: Round
+  description: "Individual trading round with multiplier, color, band, and timestamp"
+  vectorizer: text2vec-transformers
+  
+properties:
+  - name: round_id
+    dataType: [string]
+    description: "Unique round identifier"
+    indexFilterable: true
+    indexSearchable: true
+    
+  - name: multiplier
+    dataType: [number]
+    description: "Round multiplier (crash point)"
+    indexFilterable: true
+    
+  - name: color
+    dataType: [string]
+    description: "Round color (blue, purple, pink)"
+    indexFilterable: true
+    
+  - name: band
+    dataType: [string]
+    description: "Volatility band (cosmic, mega, moonshot, etc.)"
+    indexFilterable: true
+    
+  - name: timestamp
+    dataType: [date]
+    description: "Round completion timestamp (ISO 8601)"
+    indexFilterable: true
+    
+  - name: is_high_value
+    dataType: [boolean]
+    description: "True if multiplier >= 2.0x"
+    indexFilterable: true
+    
+  - name: features_json
+    dataType: [text]
+    description: "JSON string of engineered features"
