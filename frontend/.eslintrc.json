@@ -1,0 +1,8 @@
+module.exports = {
+  env: {
+    NODE_ENV: 'production',
+  },
+  extends: [
+    'next/core-web-vitals',
+  ],
+};
